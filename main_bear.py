@@ -1,12 +1,15 @@
+#Грузим Библиотеки
 from tkinter import *
 from tkinter.filedialog import askdirectory
 
 import os
 import fnmatch
 from tkinter import messagebox
+#Основной класс
 class MyFrame(Frame):
     def __init__(self):
         Frame.__init__(self)
+        #Строим окно
         self.input_text1 = StringVar()
         self.input_text2 = StringVar()
         self.input_text3 = StringVar()
@@ -35,7 +38,7 @@ class MyFrame(Frame):
         self.label6 = Label(self, text="", width=30)
         self.label6.grid(row=8, column=0, sticky=W)
 
-
+    #Загружаем и обрабатываем папки
     def load_file(self):
         fname = askdirectory()
         count_f = len(fnmatch.filter(os.listdir(fname), '*.jpg'))
@@ -48,7 +51,7 @@ class MyFrame(Frame):
             except:                     # <- naked except is a bad idea
                 messagebox.showerror("Открытие Каталога", "Не возможно прочитать\n'%s'" % fname)
             return
-
+    #Поиск медведей вставить функцию отправки
     def poisk_m(self):
         self.after(10000, self.label5.config(text='Поиск белых медведей завершен'))
         self.label6.config(text='Результат в '+ os.path.abspath(os.curdir))
